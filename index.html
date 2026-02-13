@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Will You Be My Valentine?</title>
+
+  <style>
+    body {
+      margin: 0;
+      font-family: "Arial", sans-serif;
+      background: linear-gradient(to right, #ffafbd, #ffc3a0);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .container {
+      background: rgba(255, 0, 100, 0.25);
+      padding: 40px;
+      border-radius: 20px;
+      backdrop-filter: blur(10px);
+      position: relative;
+    }
+
+    h1 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+    }
+
+    .button-row {
+      margin-top: 20px;
+    }
+
+    button {
+      padding: 12px 25px;
+      font-size: 1.2rem;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      margin: 10px;
+      transition: 0.2s ease;
+    }
+
+    .yes {
+      background: #ff4d6d;
+      color: white;
+    }
+
+    .no {
+      background: white;
+      color: #ff4d6d;
+      position: relative; /* Start normal */
+    }
+
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Will You Be My Valentine? 💘</h1>
+
+    <img src="https://media.giphy.com/media/3oz8xIsloV7zOmt81G/giphy.gif" width="300" />
+
+    <div class="button-row">
+      <button class="yes" onclick="sayYes()">Yes ❤️</button>
+      <button id="noButton" class="no">No 🙈</button>
+    </div>
+  </div>
+
+  <script>
+    const noButton = document.getElementById("noButton");
+    let activated = false;
+
+    function moveButton() {
+      const container = document.querySelector(".container");
+      const containerRect = container.getBoundingClientRect();
+
+      // On first interaction, switch to absolute positioning
+      if (!activated) {
+        const btnRect = noButton.getBoundingClientRect();
+        const containerOffsetX = btnRect.left - containerRect.left;
+        const containerOffsetY = btnRect.top - containerRect.top;
+
+        noButton.style.position = "absolute";
+        noButton.style.left = `${containerOffsetX}px`;
+        noButton.style.top = `${containerOffsetY}px`;
+
+        activated = true;
+      }
+
+      const maxX = containerRect.width - noButton.offsetWidth;
+      const maxY = containerRect.height - noButton.offsetHeight;
+
+      const randomX = Math.random() * maxX;
+      const randomY = Math.random() * maxY;
+
+      noButton.style.left = `${randomX}px`;
+      noButton.style.top = `${randomY}px`;
+    }
+
+    noButton.addEventListener("click", moveButton);
+    noButton.addEventListener("mouseover", moveButton);
+
+    function sayYes() {
+      document.body.innerHTML = `
+        <div style="display:flex;justify-content:center;align-items:center;height:100vh;background:#ff4d6d;color:white;font-family:Arial;text-align:center;">
+          <div>
+            <h1>BEST DECISION EVER ❤️</h1>
+            <p style="font-size:1.5rem;">I love you.</p>
+          </div>
+        </div>
+      `;
+    }
+  </script>
+
+</body>
+</html>
+
